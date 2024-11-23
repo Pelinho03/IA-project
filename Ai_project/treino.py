@@ -3,31 +3,33 @@ from torch import nn, optim
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
 
-
+# Transformações para pré-processamento das imagens
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
-
+# Carregar os datasets
 train_data = datasets.ImageFolder('dataset/train', transform=transform)
 val_data = datasets.ImageFolder('dataset/val', transform=transform)
 
-train_loader = DataLoader(train_data, batch_size=32, shuffle=True)
-val_loader = DataLoader(val_data, batch_size=32, shuffle=False)
+# DataLoaders para carregar os dados
+train_loader = DataLoader(train_data, batch_size=5, shuffle=True)
+val_loader = DataLoader(val_data, batch_size=5, shuffle=False)
 
-
+# Modelo ResNet18 pré-treinado, ajustando para 3 classes (Humano, Garrafa, Background)
 model = models.resnet18(pretrained=True)
-model.fc = nn.Linear(model.fc.in_features, 4)
+model.fc = nn.Linear(model.fc.in_features, 3)  # Mudança para 3 classes
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = model.to(device)
 
-
+# Critério e otimizador
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
+# Função de treino
 def train(model, train_loader, val_loader, epochs=10):
     for epoch in range(epochs):
         model.train()
@@ -47,10 +49,11 @@ def train(model, train_loader, val_loader, epochs=10):
         train_loss /= len(train_loader.dataset)
         print(f'Epoch {epoch + 1}/{epochs}, Loss: {train_loss:.4f}')
 
-
+        # Validar após cada época
         validate(model, val_loader)
 
 
+# Função de validação
 def validate(model, val_loader):
     model.eval()
     val_loss = 0.0
@@ -72,8 +75,9 @@ def validate(model, val_loader):
     print(f'Validation Loss: {val_loss:.4f}, Accuracy: {accuracy:.4f}')
 
 
+# Iniciar o treino
 train(model, train_loader, val_loader, epochs=10)
 
-
+# Salvar o modelo treinado
 torch.save(model.state_dict(), 'modelo_treinado.pth')
 print("Modelo salvo como 'modelo_treinado.pth'")
