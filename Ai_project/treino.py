@@ -20,7 +20,7 @@ val_loader = DataLoader(val_data, batch_size=5, shuffle=False)
 
 # Modelo ResNet18 pré-treinado, ajustando para 3 classes (Humano, Garrafa, Background)
 model = models.resnet18(pretrained=True)
-model.fc = nn.Linear(model.fc.in_features, 3)  # Mudança para 3 classes
+model.fc = nn.Linear(model.fc.in_features, 7)  # Mudança para 3 classes
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = model.to(device)
 
