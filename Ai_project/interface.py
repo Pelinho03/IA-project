@@ -36,16 +36,34 @@ def open_file():
 
             # Iterar pelas deteções e verificar a confiança
             for label, score, box in zip(labels, scores, boxes):
-                if score > 0.3:  # Considerar apenas deteções com confiança > 0.3
+                if score > 0.4:  # Considerar apenas deteções com confiança > 0.2
                     found_detection = True
+                    # Associações de labels
                     if label == 1:
                         class_name = 'Humano'
+                        color = (0, 255, 0)  # Cor verde para Humanos
                     elif label == 43:
+                        class_name = 'Mar'
+                        color = (255, 0, 0)  # Cor azul para Mar
+                    elif label == 44:
                         class_name = 'Garrafa'
+                        color = (0, 0, 255)  # Cor vermelha para Garrafa
+                    elif label == 45:
+                        class_name = 'Nuvens'
+                        color = (255, 255, 0)  # Cor amarela para Nuvens
+                    elif label == 46:
+                        class_name = 'Plástico'
+                        color = (255, 0, 255)  # Cor rosa para Plástico
+                    elif label == 47:
+                        class_name = 'Terra'
+                        color = (0, 255, 255)  # Cor ciano para Terra
+                    else:
+                        class_name = 'Desconhecido'  # Caso o label não corresponda a nenhuma classe conhecida
+                        color = (255, 255, 255)  # Cor branca para Detecção Desconhecida
 
-                    # Desenhar a caixa de detecção na imagem
+                    # Desenhar a caixa de detecção na imagem com a cor correspondente
                     x1, y1, x2, y2 = map(int, box)
-                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                    cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
 
             # Caso não tenha encontrado nenhuma detecção com confiança
             if not found_detection:
@@ -54,9 +72,9 @@ def open_file():
             # Exibir o nome da classe detectada
             result_label.config(text=f'Resultado: {class_name}')
 
-            # Redimensionar a imagem para caber na janela sem distorção
-            max_width = 600  # Ajuste conforme necessário
-            max_height = 500  # Ajuste conforme necessário
+            # Redimensionar a imagem para caber na janela sem distorção, mantendo a proporção
+            max_width = 500  # Ajuste conforme necessário
+            max_height = 400  # Ajuste conforme necessário
 
             # Obter as dimensões originais da imagem
             img_width, img_height = image_rgb.shape[1], image_rgb.shape[0]
@@ -68,7 +86,7 @@ def open_file():
             new_width = int(img_width * scale_factor)
             new_height = int(img_height * scale_factor)
 
-            # Redimensionar a imagem sem cortar
+            # Redimensionar a imagem sem distorcer, mantendo a proporção
             im_resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
 
             # Converter para ImageTk (no formato PIL)
@@ -89,7 +107,7 @@ def open_file():
 # Criar a janela principal
 root = tk.Tk()
 root.title("Interface de Detecção de Imagens")
-root.geometry("600x500")
+root.geometry("800x600")
 
 # Texto de instrução
 instruction_label = tk.Label(root, text="Escolhe uma imagem", font=("Ubuntu", 14))
@@ -100,7 +118,7 @@ select_button = tk.Button(root, text="Selecionar Imagem", font=("Ubuntu", 12), c
 select_button.pack(pady=10)
 
 # Label para mostrar o resultado da predição
-result_label = tk.Label(root, text="", font=("Arial", 12))
+result_label = tk.Label(root, text="", font=("Ubuntu", 12))
 result_label.pack(pady=10)
 
 # Label para exibir a imagem com as caixas de detecção
