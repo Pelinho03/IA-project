@@ -40,16 +40,16 @@ A aplicação possui uma interface gráfica em **Tkinter**, onde o utilizador po
 
 ### 1. Clonar o Repositório
 
-Clone o repositório para a sua máquina local:
+Clonar o repositório para a uma máquina local:
 
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/...
 
 ```
 
 ### 2. Instalar Dependências
 
-Instale as dependências necessárias utilizando o **pip**:
+Instalar as dependências necessárias utilizando o **pip**:
 
 ```bash
 pip install -r requirements.txt
@@ -68,7 +68,7 @@ tk==0.1.0
 
 ### 3. Treinar o Modelo
 
-Para treinar o modelo, execute o seguinte comando no terminal:
+Para treinar o modelo, basta executar o seguinte comando no terminal:
 
 ```bash
 python treino.py
