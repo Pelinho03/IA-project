@@ -19,7 +19,6 @@ def open_file():
 
             prob = predict_image(image_rgb)
 
-            # Definir o resultado com base na probabilidade
             if prob > 0.5:
                 result_text = f"Detetado: Garrafa Plástica ({prob * 100:.2f}%)"
                 result_color = "green"
@@ -29,8 +28,6 @@ def open_file():
 
             result_label.config(text=result_text, fg=result_color)
 
-            max_width = 500  # Largura máxima
-            max_height = 400  # Altura máxima
             max_width = 500
             max_height = 400
 
