@@ -20,12 +20,13 @@ val_loader = DataLoader(val_data, batch_size=5, shuffle=False)
 
 # Modelo ResNet18 pré-treinado, ajustando para 3 classes (Humano, Garrafa, Background)
 model = models.resnet18(pretrained=True)
-model.fc = nn.Linear(model.fc.in_features, 7)  # Mudança para 3 classes
+model.fc = nn.Linear(model.fc.in_features, 1)  # Apenas 1 classe
+
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = model.to(device)
 
 # Critério e otimizador
-criterion = nn.CrossEntropyLoss()
+criterion = nn.BCEWithLogitsLoss()  # Para problemas binários
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
@@ -67,7 +68,7 @@ def validate(model, val_loader):
             loss = criterion(outputs, labels)
             val_loss += loss.item() * images.size(0)
 
-            _, predicted = torch.max(outputs, 1)
+            predicted = (torch.sigmoid(outputs) > 0.5).float()
             correct += (predicted == labels).sum().item()
 
     val_loss /= len(val_loader.dataset)
