@@ -61,23 +61,23 @@ root.geometry("900x700")
 root.config(bg="#f2f2f2")  # Cor de fundo suave
 
 # Frame para agrupar os componentes principais
-frame = tk.Frame(root, bg="#f2f2f2")
+frame = tk.Frame(root, bg="#F8F8F2")
 frame.pack(fill="both", expand=True)
 
 # Título
-title_label = tk.Label(frame, text="Sistema de Deteção de Garrafas e Sacas plásticas", font=("Ubuntu", 20, "bold"), bg="#f2f2f2", fg="#333")
+title_label = tk.Label(frame, text="Sistema de Deteção de Garrafas e Sacas plásticas", font=("Ubuntu", 20, "bold"), bg="#F8F8F2", fg="#282A36")
 title_label.pack(pady=20)
 
 # Texto de instrução
-instruction_label = tk.Label(frame, text="Escolhe uma imagem para análise", font=("Ubuntu", 14), bg="#f2f2f2", fg="#555")
+instruction_label = tk.Label(frame, text="Escolhe uma imagem para análise", font=("Ubuntu", 14), bg="#F8F8F2", fg="#282A36")
 instruction_label.pack(pady=10)
 
 # Botão para selecionar o arquivo
-select_button = tk.Button(frame, text="Selecionar Imagem", font=("Ubuntu", 12), bg="#4CAF50", fg="white", relief="flat", padx=20, pady=10, command=open_file)
+select_button = tk.Button(frame, text="Selecionar Imagem", font=("Ubuntu", 12), bg="#282A36", fg="#F8F8F2", relief="flat", padx=20, pady=10, command=open_file)
 select_button.pack(pady=20)
 
 # Label para mostrar o resultado da predição
-result_label = tk.Label(frame, text="", font=("Ubuntu", 16), bg="#f2f2f2", fg="#333")
+result_label = tk.Label(frame, text="", font=("Ubuntu", 16), bg="#F8F8F2", fg="#282A36")
 result_label.pack(pady=10)
 
 # Label para exibir a imagem submetida
@@ -85,7 +85,7 @@ image_label = tk.Label(frame, bg="#f2f2f2")
 image_label.pack(pady=20)
 
 # Rodapé com instruções adicionais
-footer_label = tk.Label(root, text="Desenvolvido por [Teu Nome]", font=("Ubuntu", 10), bg="#f2f2f2", fg="#888")
+footer_label = tk.Label(root, text="Desenvolvido por Daniel | Paulo | Rúben", font=("Ubuntu", 10), bg="#F8F8F2", fg="#282A36")
 footer_label.pack(side="bottom", pady=10)
 
 # Iniciar a interface gráfica
