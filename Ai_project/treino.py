@@ -73,10 +73,10 @@ def validate(model, val_loader):
             images, labels = images.to(device), labels.to(device)
 
             outputs = model(images)
-            loss = criterion(outputs, labels.float())  # Certifique-se de que as labels são do tipo float
+            loss = criterion(outputs, labels.float())
             val_loss += loss.item() * images.size(0)
 
-            predicted = (torch.sigmoid(outputs) > 0.5).float()  # Aplicar limiar para a predição
+            predicted = (torch.sigmoid(outputs) > 0.5).float()
             correct += (predicted == labels).sum().item()
 
     val_loss /= len(val_loader.dataset)

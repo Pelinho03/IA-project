@@ -71,10 +71,10 @@ def predict_image(image, score_threshold=0.3):
 
     # Fazer predição com a ResNet18 (classificação)
     with torch.no_grad():
-        output = model(image_tensor_class)  # Passar pela rede
-        probabilities = torch.softmax(output, dim=1)  # Obter probabilidades das duas classes
-        class_index = torch.argmax(probabilities).item()  # Índice da classe com maior probabilidade
-        confidence = probabilities[0, class_index].item()  # Confiança da classe predita
+        output = model(image_tensor_class)
+        probabilities = torch.softmax(output, dim=1)
+        class_index = torch.argmax(probabilities).item()
+        confidence = probabilities[0, class_index].item()
 
     # Mapear índice para o nome da classe
     threshold = 0.55  # Define um limite para considerar a predição confiável
