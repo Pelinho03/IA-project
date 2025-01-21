@@ -65,7 +65,7 @@ def predict_image(image, score_threshold=0.3):
     transform_class = transforms.Compose([
         transforms.Resize((224, 224)),  # Redimensionar para o tamanho compatível com ResNet18
         transforms.ToTensor(),  # Converter para tensor
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # Normalização padrão
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     ])
     image_tensor_class = transform_class(image_pil).unsqueeze(0).to(device)
 
@@ -77,7 +77,12 @@ def predict_image(image, score_threshold=0.3):
         confidence = probabilities[0, class_index].item()  # Confiança da classe predita
 
     # Mapear índice para o nome da classe
-    class_map = {0: "Garrafa Plástica", 1: "Saca Plástica"}
-    predicted_class = class_map[class_index]
+    threshold = 0.55  # Define um limite para considerar a predição confiável
+    if probabilities[0, 0] > threshold:
+        predicted_class = "Garrafa Plástica"
+    elif probabilities[0, 1] > threshold:
+        predicted_class = "Saca Plástica"
+    else:
+        predicted_class = "Indefinido"
 
     return predicted_class, confidence, np.array(image_pil), selected_boxes
