@@ -65,7 +65,7 @@ frame = tk.Frame(root, bg="#F8F8F2")
 frame.pack(fill="both", expand=True)
 
 # Título
-title_label = tk.Label(frame, text="Sistema de Deteção de Garrafas e Sacas plásticas", font=("Ubuntu", 20, "bold"), bg="#F8F8F2", fg="#282A36")
+title_label = tk.Label(frame, text="OceanEye", font=("Ubuntu", 20, "bold"), bg="#F8F8F2", fg="#282A36")
 title_label.pack(pady=20)
 
 # Texto de instrução
@@ -85,7 +85,7 @@ image_label = tk.Label(frame, bg="#f2f2f2")
 image_label.pack(pady=20)
 
 # Rodapé com instruções adicionais
-footer_label = tk.Label(root, text="Desenvolvido por Daniel | Paulo | Rúben", font=("Ubuntu", 10), bg="#F8F8F2", fg="#282A36")
+footer_label = tk.Label(root, text="Desenvolvido por Paulo", font=("Ubuntu", 10), bg="#F8F8F2", fg="#282A36")
 footer_label.pack(side="bottom", pady=10)
 
 # Iniciar a interface gráfica
