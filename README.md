@@ -1,63 +1,86 @@
+
+# **OceanEye**  
+
+Sistema de Deteção de Resíduos Plásticos com Inteligência Artificial  
+
+Este repositório contém a implementação de uma aplicação desenvolvida no âmbito da unidade curricular de **Inteligência Artificial**, do curso de **Engenharia Informática**. O projeto tem como objetivo contribuir para a preservação ambiental através da deteção automática de garrafas e sacas plásticas em imagens, utilizando técnicas avançadas de Deep Learning.
+
 ----------
-# Sistema de Deteção de Resíduos Plásticos
 
-Este projeto tem como objetivo a criação de um sistema inteligente para a deteção de resíduos plásticos em ambientes naturais, utilizando técnicas de Deep Learning. O sistema foi desenvolvido no âmbito da cadeira de Inteligência Artificial do curso de Engenharia Informática, sendo uma aplicação prática de modelos avançados para a preservação ambiental.
+## **Objetivo**  
 
-## Descrição do Projeto
+O principal objetivo deste projeto é:  
 
-O sistema utiliza um modelo pré-treinado da arquitetura **ResNet18** adaptado para a classificação binária entre "garrafa plástica" e "não garrafa plástica". A deteção é feita através de imagens, sendo as mesmas analisadas para determinar a presença de resíduos plásticos.
+- Desenvolver um sistema inteligente para **deteção e classificação de resíduos plásticos** em imagens.  
+- Implementar um modelo de **Deep Learning** baseado em redes neuronais convolucionais (CNN).  
+- Criar uma **interface gráfica intuitiva** para interação com o utilizador.  
+- Aplicar conceitos de **visão computacional**, **aprendizagem profunda** e **processamento de imagens** em um cenário real.  
 
-A aplicação possui uma interface gráfica em **Tkinter**, onde o utilizador pode carregar imagens, que são então processadas e analisadas pelo modelo de Deep Learning. O modelo foi treinado com um dataset de imagens, classificando as mesmas como "Garrafa Plástica" ou "Desconhecido".
+----------
 
-## Tecnologias Utilizadas
+## **Funcionalidades**  
 
--   **Python**: Linguagem de programação utilizada.
--   **PyTorch**: Biblioteca para Deep Learning, utilizada para treinar e realizar a inferência com o modelo.
--   **OpenCV**: Biblioteca para manipulação de imagens.
--   **Tkinter**: Framework para a criação da interface gráfica do utilizador.
--   **Torchvision**: Utilizada para trabalhar com redes neuronais pré-treinadas e realizar as transformações nas imagens.
+### **Deteção de Objetos**  
+- Identifica garrafas e sacas plásticas em imagens utilizando **Faster R-CNN**.  
+- Desenha **caixas delimitadoras** nos objetos detectados.  
 
-## Estrutura do Repositório
+### **Classificação de Resíduos**  
+- Classifica os objetos detectados em duas categorias:  
+  - **Garrafa Plástica**  
+  - **Saca Plástica**  
+- Exibe a **confiança da predição** em percentagem.  
+
+### **Interface Gráfica**  
+- Permite ao utilizador **carregar imagens** para análise.  
+- Mostra o resultado da deteção e classificação em tempo real.  
+- Interface desenvolvida com **Tkinter**, com design moderno e responsivo.  
+
+----------
+
+## **Tecnologias Utilizadas**  
+
+- **Python 3** – Linguagem principal do projeto.  
+- **PyTorch** – Framework para Deep Learning (treino e inferência).  
+- **OpenCV** – Processamento de imagens e deteção de objetos.  
+- **Torchvision** – Acesso a modelos pré-treinados e transformações de imagem.  
+- **Tkinter** – Interface gráfica do utilizador (GUI).  
+- **Pillow (PIL)** – Manipulação e exibição de imagens.  
+
+----------
+
+## **Estrutura do Projeto**  
 
 ```bash
-├── dataset/
-│   ├── train/
-│   └── val/
+OceanEye/
+│
+├── dataset/                # Pasta com dados de treino e validação
+│   ├── train/              # Imagens para treino
+│   └── val/                # Imagens para validação
+│
 ├── treino.py               # Script para treinar o modelo
-├── predictor.py            # Script para fazer a predição com o modelo treinado
-├── interface.py            # Script para a interface gráfica
-└── modelo_treinado.pth     # Modelo treinado e salvo
-
+├── predictor.py            # Lógica de predição (Faster R-CNN + ResNet18)
+├── interface.py            # Interface gráfica (Tkinter)
+│
+├── modelo_treinado.pth     # Modelo treinado (ResNet18)
+└── README.md               # Documentação do projeto
 ```
 
--   **dataset/**: Contém as pastas `train` e `val` com as imagens para treino e validação.
--   **treino.py**: Script responsável pelo treino do modelo.
--   **predictor.py**: Contém a função para carregar o modelo treinado e realizar a predição em novas imagens.
--   **interface.py**: Contém a implementação da interface gráfica para interação com o utilizador.
--   **modelo_treinado.pth**: Arquivo contendo o modelo treinado, pronto para realizar predições.
+----------
 
-## Como Executar
+## **Como Executar o Projeto**  
 
-### 1. Clonar o Repositório
-
-Clonar o repositório para a uma máquina local:
-
+### **1. Clonar o Repositório**  
 ```bash
-git clone https://github.com/...
-
+git clone https://github.com/Pelinho03/IA-project.git
+cd IA-project
 ```
 
-### 2. Instalar Dependências
-
-Instalar as dependências necessárias utilizando o **pip**:
-
+### **2. Instalar Dependências**  
 ```bash
 pip install -r requirements.txt
-
 ```
 
-Aqui está um exemplo de `requirements.txt`:
-
+**Exemplo de `requirements.txt`:**  
 ```
 torch==2.5.1
 torchvision==0.20.1
@@ -66,47 +89,37 @@ Pillow==11.1.0
 tk==0.1.0
 ```
 
-### 3. Treinar o Modelo
-
-Para treinar o modelo, basta executar o seguinte comando no terminal:
-
+### **3. Treinar o Modelo (Opcional)**  
+Se desejar treinar o modelo novamente:  
 ```bash
 python treino.py
-
 ```
 
-Isso irá treinar o modelo usando as imagens no diretório `dataset/` e salvar o modelo treinado como `modelo_treinado.pth`.
-
-### 4. Executar a Interface Gráfica
-
-Após o treino, pode-se executar a aplicação para testar a deteção de garrafas plásticas. Execute o seguinte comando:
-
+### **4. Executar a Aplicação**  
 ```bash
 python interface.py
-
 ```
 
-A interface gráfica será aberta, permitindo que o utilizador selecione uma imagem. O sistema irá realizar a predição e mostrar o resultado.
+----------
 
-## Resultados
+## **Resultados e Exemplos**  
 
-Após a execução da interface, o sistema mostrará se uma garrafa plástica foi detectada ou não, com a probabilidade associada. A cor do texto indica se o sistema detectou ou não um plástico:
-
--   **Verde**: Garrafa Plástica detectada.
--   **Vermelho**: Nenhuma garrafa detectada.
-
-## Contribuição
-
-Se desejar contribuir para o projeto, siga os seguintes passos:
-
-1.  Crie um fork do repositório.
-2.  Crie uma nova branch (`git checkout -b feature/nova-funcionalidade`).
-3.  Faça as alterações e commit (`git commit -am 'Adicionando nova funcionalidade'`).
-4.  Faça push para a sua branch (`git push origin feature/nova-funcionalidade`).
-5.  Crie uma pull request.
-
-## Considerações Finais
-
-Este projeto demonstra a aplicação de redes neuronais convolucionais no campo da preservação ambiental. Através da deteção de resíduos plásticos em imagens, o sistema pode ser usado como base para desenvolver soluções mais robustas para o monitoramento ambiental.
+- **Deteção bem-sucedida:**  
+  - A interface exibe a imagem com as **caixas delimitadoras** e a classe detectada.  
+  - **Cores de feedback:**  
+    - ✅ **Verde**: Garrafa Plástica detectada.  
+    - 🔵 **Azul**: Saca Plástica detectada.  
+    - ❌ **Vermelho**: Nenhum plástico detectado.  
 
 ----------
+
+## **Ideia Central**  
+
+> Este projeto demonstra como a **Inteligência Artificial** pode ser aplicada em desafios ambientais, fornecendo uma ferramenta para deteção automática de poluição por plásticos. A solução pode ser integrada em sistemas de monitorização costeira ou robótica de limpeza.  
+
+----------
+
+## **Desenvolvido por**  
+
+**Paulo Guimarães**  
+[GitHub](https://github.com/Pelinho03)  
